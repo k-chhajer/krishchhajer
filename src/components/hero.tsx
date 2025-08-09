@@ -1,8 +1,28 @@
 import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useRef } from "react"
+import { useFadeInAnimation } from "@/lib/utils"
 
 export function Hero() {
+  const contentRef = useRef<HTMLDivElement>(null)
+  const imageRef = useRef<HTMLDivElement>(null)
+  const { observeElement } = useFadeInAnimation()
+
+  useEffect(() => {
+    if (contentRef.current) {
+      const observer = observeElement(contentRef.current)
+      return () => observer.disconnect()
+    }
+  }, [observeElement])
+
+  useEffect(() => {
+    if (imageRef.current) {
+      const observer = observeElement(imageRef.current)
+      return () => observer.disconnect()
+    }
+  }, [observeElement])
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background gradient effects */}
@@ -18,14 +38,14 @@ export function Hero() {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Content */}
-          <div className="order-2 lg:order-1">
-                         <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-white">
+          <div ref={contentRef} className="order-2 lg:order-1 fade-in-left">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-white">
               <span className="gradient-text">Krish Chhajer</span>
              </h1>
 
              <div className="mb-8">
                <p className="text-xl text-gray-300 mb-4">ECE @ University of Toronto</p>
-               <p className="text-lg text-gray-400 leading-relaxed">
+               <p className="text-lg text-gray-400 leading-relaxed text-justify">
                  Third year Computer Engineering student at the University of Toronto. Building intelligent systems around AI, Robotics and Hardware. 
                </p>
              </div>
@@ -58,7 +78,7 @@ export function Hero() {
           </div>
 
           {/* Right side - Picture */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
+          <div ref={imageRef} className="flex justify-center lg:justify-end order-1 lg:order-2 fade-in-right">
             <div className="relative">
               <div className="w-80 h-80 rounded-full overflow-hidden gradient-border glow-effect">
                 <div className="gradient-border-content rounded-full">

@@ -5,7 +5,6 @@ import { Hero } from "@/components/hero"
 import { Navigation } from "@/components/navigation"
 import { Experience } from "@/components/experience"
 import { Projects } from "@/components/projects"
-import { Resume } from "@/components/resume"
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState("experience")
@@ -16,8 +15,6 @@ export default function Portfolio() {
         return <Experience />
       case "projects":
         return <Projects />
-      case "resume":
-        return <Resume />
       default:
         return <Experience />
     }
