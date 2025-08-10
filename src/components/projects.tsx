@@ -54,7 +54,7 @@ export function Projects() {
       title: "AIM: LLM powered GIS Maps",
       description:
         "LLM powered Mapping Application developed using OpenStreetMap in C++. Features intelligent route planning and semantic retrieval of points of interest.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/aim.png",
       technologies: ["C++", "Djikstra", "OpenGL", "Langchain"],
       githubUrl: "https://github.com/k-chhajer",
       tags: ["all", "ai-agents", "software"],
@@ -64,7 +64,7 @@ export function Projects() {
       title: "AutoGrid AI (IEEE SEGE 2025)",
       description:
         "Deep Reinforcement Learning Framework for Autonomous Microgrid Management with Transformer based Forecasting and real time monitoring dashboard",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/autogrid_ai.png",
       technologies: ["RL", "Gym", "Next.js", "Transformers"],
       githubUrl: "https://github.com/kennykguo/autogrid-ai",
       tags: ["all", "deep-learning", "software"],
@@ -74,7 +74,7 @@ export function Projects() {
       title: "VisionWise",
       description:
         "Currently working on LLM powered evaluation framework for evaluating VLA Policies in Robotics. Integrating Isaac-Sim for realistic simulation environments.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/visionwise.png",
       technologies: ["Python", "Isaac-Sim", "Transformers", "LLMs"],
       githubUrl: "https://github.com/k-chhajer",
       tags: ["all", "ai-agents", "robotics"],
@@ -84,7 +84,7 @@ export function Projects() {
       title: "J.O.S.H",
       description:
         "Jetson and STM32 powered Humanoid Robot in development. Features advanced firmware for real-time control and autonomous behavior.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/josh.jpg",
       technologies: ["Rust", "STM32", "Firmware"],
       githubUrl: "https://github.com/k-chhajer/J.O.S.H",
       tags: ["all", "hardware", "robotics"],
@@ -94,7 +94,7 @@ export function Projects() {
       title: "Pacman (Verilog Edition)",
       description:
         "A twist on the classic Pacman, implemented from scratch in Verilog on DE1-SoC. Features interactive gameplay with VGA display and audio feedback.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/placeholder.svg",
       technologies: ["Verilog", "FPGAs", "Digital Logic"],
       githubUrl: "https://github.com/k-chhajer/pacman_on_verilog",
       tags: ["all", "verilog", "hardware"],
@@ -104,7 +104,7 @@ export function Projects() {
       title: "FPGA controlled Lego Robot",
       description:
         "2 wheel Lego Cart controlled using DE1-SoC and Nios V to move around and dance to some music. Features real-time motor control and audio synchronization.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/placeholder.svg",
       technologies: ["C", "Nios V", "FPGAs"],
       githubUrl: "https://github.com/k-chhajer/lego-robot-nios-v",
       tags: ["all", "hardware", "robotics"],
@@ -114,7 +114,7 @@ export function Projects() {
       title: "RespiraCheck",
       description:
         "Deep Learning Pipeline to detect Covid from Coughs. Built comprehensive ML pipeline with web interface for real-time analysis.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/RespiraCheck.png",
       technologies: ["Python", "PyTorch", "Next.js", "FastAPI"],
       githubUrl: "https://github.com/jnnchi/RespiraCheck",
       tags: ["all", "deep-learning", "software"],
@@ -124,7 +124,7 @@ export function Projects() {
       title: "Fall Detection and Gait Pattern Analysis",
       description:
         "A CNN-LSTM based Deep Learning Pipeline to detect Falls (tested IRL) from any phone using IMU sensors with 92%+ test accuracy.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/fall_detection.png",
       technologies: ["Python", "PyTorch", "Neural Networks"],
       githubUrl: "https://github.com/k-chhajer/gaitanalysis",
       tags: ["all", "deep-learning", "software"],
@@ -134,7 +134,7 @@ export function Projects() {
       title: "TrashTalker",
       description:
         "Arduino powered smart waste segregation garbage bin. Features intelligent sorting and IoT connectivity for waste management optimization.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/trashtalker.jpg",
       technologies: ["C++", "Arduino", "IoT"],
       githubUrl: "https://github.com/k-chhajer",
       tags: ["all", "hardware", "robotics"],
@@ -144,7 +144,7 @@ export function Projects() {
       title: "Personal Portfolio Website",
       description:
         "This website built with modern web technologies. Features responsive design and smooth animations for optimal user experience.",
-      image: "/placeholder.svg?height=300&width=500",
+      image: "/personal_website.png",
       technologies: ["TypeScript", "Next.js", "Frontend"],
       githubUrl: "https://github.com/k-chhajer/krishchhajer",
       tags: ["all", "software"],
@@ -191,7 +191,7 @@ export function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="projects-grid grid md:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => {
             // Calculate row-based delays: items in same row get same delay
             const row = Math.floor(index / 3) // 3 columns per row
@@ -233,8 +233,8 @@ function ProjectItem({ project, delayClass, observeElement }: {
   }, [observeElement])
 
   return (
-    <div ref={itemRef} className={`group fade-in ${delayClass}`}>
-      <Card className="border border-gray-700 bg-gray-900/50 hover:bg-gray-800/50 transition-all duration-300 overflow-hidden h-full">
+    <div ref={itemRef} className={`project-item group/project fade-in ${delayClass} transition-all duration-300`}>
+      <Card className="border border-gray-700 bg-gray-900/50 hover:bg-gray-800/50 transition-all duration-300 overflow-hidden h-full opacity-100 brightness-100 hover:opacity-100 hover:brightness-100">
         <div className="h-full rounded-lg">
           <div className="relative overflow-hidden">
             <Image
@@ -242,7 +242,11 @@ function ProjectItem({ project, delayClass, observeElement }: {
               alt={project.title}
               width={600}
               height={400}
-              className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+              className={`w-full h-64 transition-all duration-500 group-hover:scale-110 ${
+                project.title === "Fall Detection and Gait Pattern Analysis" 
+                  ? "object-cover object-top" 
+                  : "object-cover"
+              }`}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
             <div className="absolute top-3 right-3 bg-black/60 rounded-full px-3 py-1">
@@ -250,11 +254,11 @@ function ProjectItem({ project, delayClass, observeElement }: {
             </div>
           </div>
           <CardContent className="p-5">
-            <h3 className="text-lg font-semibold text-white mb-2">{project.title}</h3>
-            <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3">{project.description}</p>
+            <h3 className="text-lg font-semibold text-white mb-2 transition-colors duration-300">{project.title}</h3>
+            <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-3 transition-colors duration-300">{project.description}</p>
             <div className="flex flex-wrap gap-1 mb-4">
               {project.technologies.map((tech: string, techIndex: number) => (
-                <Badge key={techIndex} variant="outline" className="border-gray-600 text-gray-300 text-xs">
+                <Badge key={techIndex} variant="outline" className="badge border-gray-600 text-gray-300 text-xs transition-all duration-300">
                   {tech}
                 </Badge>
               ))}
@@ -264,7 +268,7 @@ function ProjectItem({ project, delayClass, observeElement }: {
                 variant="outline"
                 size="sm"
                 asChild
-                className="border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent flex-1"
+                className="project-button border-gray-600 text-gray-300 hover:bg-gray-800 bg-transparent flex-1 transition-all duration-300"
               >
                 <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="h-3 w-3 mr-1" />

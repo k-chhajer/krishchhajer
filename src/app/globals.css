@@ -75,6 +75,65 @@
     animation: gradientLineMove 4s ease-in-out infinite;
   }
 
+  /* Project hover effect - blur other projects when one is hovered */
+  .projects-grid:has(.project-item:hover) .project-item:not(:hover) {
+    opacity: 0.7;
+    filter: brightness(0.75);
+  }
+
+  .projects-grid:has(.project-item:hover) .project-item:not(:hover) h3 {
+    color: rgb(156 163 175); /* text-gray-400 */
+  }
+
+  .projects-grid:has(.project-item:hover) .project-item:not(:hover) p {
+    color: rgb(107 114 128); /* text-gray-500 */
+  }
+
+  .projects-grid:has(.project-item:hover) .project-item:not(:hover) .badge {
+    border-color: rgb(55 65 81); /* border-gray-700 */
+    color: rgb(107 114 128); /* text-gray-500 */
+  }
+
+  .projects-grid:has(.project-item:hover) .project-item:not(:hover) .project-button {
+    border-color: rgb(55 65 81); /* border-gray-700 */
+    color: rgb(107 114 128); /* text-gray-500 */
+  }
+
+  /* Ensure hovered project stays bright */
+  .project-item:hover {
+    opacity: 1 !important;
+    filter: brightness(1) !important;
+  }
+
+  .project-item:hover h3 {
+    color: rgb(255 255 255) !important; /* text-white */
+  }
+
+  .project-item:hover p {
+    color: rgb(209 213 219) !important; /* text-gray-300 */
+  }
+
+  .project-item:hover .badge {
+    border-color: rgb(75 85 99) !important; /* border-gray-600 */
+    color: rgb(209 213 219) !important; /* text-gray-300 */
+  }
+
+  .project-item:hover .project-button {
+    border-color: rgb(75 85 99) !important; /* border-gray-600 */
+    color: rgb(255 255 255) !important; /* text-white */
+  }
+
+  /* Fall Detection image focus on upper part */
+  .project-item img[alt="Fall Detection and Gait Pattern Analysis"] {
+    object-position: top center !important;
+  }
+
+  /* RespiraCheck image zoomed out */
+  .project-item img[alt="RespiraCheck"] {
+    object-fit: cover !important;
+    object-position: top left !important;
+  }
+
   /* Fade-in animation classes */
   .fade-in {
     opacity: 0;
