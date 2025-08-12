@@ -123,6 +123,55 @@
     color: rgb(255 255 255) !important; /* text-white */
   }
 
+  /* Disable hover effects on mobile devices */
+  @media (max-width: 768px) {
+    .projects-grid:has(.project-item:hover) .project-item:not(:hover) {
+      opacity: 1;
+      filter: brightness(1);
+    }
+
+    .projects-grid:has(.project-item:hover) .project-item:not(:hover) h3 {
+      color: rgb(255 255 255); /* text-white */
+    }
+
+    .projects-grid:has(.project-item:hover) .project-item:not(:hover) p {
+      color: rgb(209 213 219); /* text-gray-300 */
+    }
+
+    .projects-grid:has(.project-item:hover) .project-item:not(:hover) .badge {
+      border-color: rgb(75 85 99); /* border-gray-600 */
+      color: rgb(209 213 219); /* text-gray-300 */
+    }
+
+    .projects-grid:has(.project-item:hover) .project-item:not(:hover) .project-button {
+      border-color: rgb(75 85 99); /* border-gray-600 */
+      color: rgb(255 255 255); /* text-white */
+    }
+
+    .project-item:hover {
+      opacity: 1 !important;
+      filter: brightness(1) !important;
+    }
+
+    .project-item:hover h3 {
+      color: rgb(255 255 255) !important; /* text-white */
+    }
+
+    .project-item:hover p {
+      color: rgb(209 213 219) !important; /* text-gray-300 */
+    }
+
+    .project-item:hover .badge {
+      border-color: rgb(75 85 99) !important; /* border-gray-600 */
+      color: rgb(209 213 219) !important; /* text-gray-300 */
+    }
+
+    .project-item:hover .project-button {
+      border-color: rgb(75 85 99) !important; /* border-gray-600 */
+      color: rgb(255 255 255) !important; /* text-white */
+    }
+  }
+
   /* Fall Detection image focus on upper part */
   .project-item img[alt="Fall Detection and Gait Pattern Analysis"] {
     object-position: top center !important;
