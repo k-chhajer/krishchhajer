@@ -1,0 +1,204 @@
+import React, { useState, useEffect } from 'react';
+import { Github, Twitter, Linkedin, Mail, ArrowUpRight, Sun, Moon } from 'lucide-react';
+
+const App = () => {
+  // 1. State for theme toggle (defaulting to dark)
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
+
+  // Dynamic classes based on theme
+  const theme = {
+    bg: isDarkMode ? "bg-black" : "bg-zinc-50",
+    text: isDarkMode ? "text-zinc-400" : "text-zinc-600",
+    heading: isDarkMode ? "text-zinc-100" : "text-zinc-900",
+    subheading: isDarkMode ? "text-zinc-500" : "text-zinc-400",
+    primary: isDarkMode ? "text-zinc-200" : "text-zinc-800",
+    cardHover: isDarkMode ? "hover:bg-zinc-900" : "hover:bg-zinc-200/50",
+    footerBorder: isDarkMode ? "border-zinc-900" : "border-zinc-200",
+    selection: isDarkMode ? "selection:bg-zinc-800 selection:text-zinc-200" : "selection:bg-zinc-200 selection:text-zinc-900"
+  };
+
+  return (
+    <>
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+          
+          /* 2. Fade In Animation Keyframes */
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          
+          .animate-fade-in {
+            animation: fadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+          }
+        `}
+      </style>
+
+      {/* Main Container with smooth color transition */}
+      <div 
+        className={`min-h-screen transition-colors duration-500 ease-in-out ${theme.bg} ${theme.text} ${theme.selection}`}
+        style={{ fontFamily: '"Space Grotesk", sans-serif' }}
+      >
+        <div className="max-w-2xl mx-auto px-6 py-20 md:py-28 animate-fade-in">
+          
+          {/* Header */}
+          <header className="mb-20 space-y-6">
+            <h1 className={`${theme.heading} font-medium text-xl tracking-tight transition-colors duration-300`}>
+              Alex Chen
+            </h1>
+            <div className="space-y-4 text-[15px] leading-relaxed max-w-lg font-light">
+              <p>
+                Research Engineer building scalable systems for generative models. 
+                Currently exploring sparse attention mechanisms and model interpretability.
+              </p>
+              <p>
+                Previously at DeepMind and Stanford AI Lab. I enjoy simplifying complex 
+                architectures and writing about efficient training methods.
+              </p>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-6 pt-2">
+              <SocialLink href="https://twitter.com" icon={<Twitter size={15} />} label="Twitter" isDarkMode={isDarkMode} />
+              <SocialLink href="https://github.com" icon={<Github size={15} />} label="GitHub" isDarkMode={isDarkMode} />
+              <SocialLink href="https://linkedin.com" icon={<Linkedin size={15} />} label="LinkedIn" isDarkMode={isDarkMode} />
+              <SocialLink href="mailto:hello@example.com" icon={<Mail size={15} />} label="Email" isDarkMode={isDarkMode} />
+            </div>
+          </header>
+
+          {/* Experience */}
+          <Section title="Experience" theme={theme}>
+            <ListItem 
+              title="Research Engineer" 
+              subtitle="OpenAI" 
+              date="2024 — Present" 
+              theme={theme}
+            />
+            <ListItem 
+              title="Machine Learning Intern" 
+              subtitle="Google DeepMind" 
+              date="2023" 
+              theme={theme}
+            />
+            <ListItem 
+              title="Research Assistant" 
+              subtitle="Stanford AI Lab" 
+              date="2021 — 2022" 
+              theme={theme}
+            />
+          </Section>
+
+          {/* Projects */}
+          <Section title="Projects" theme={theme}>
+            <ProjectItem 
+              title="FlashAttention-V3 Implementation" 
+              description="Optimized CUDA kernels for faster attention computation on H100s."
+              href="#"
+              theme={theme}
+            />
+            <ProjectItem 
+              title="TinyLlama-Zero" 
+              description="Pre-training a 1.1B parameter model on a single node."
+              href="#"
+              theme={theme}
+            />
+            <ProjectItem 
+              title="Neural Differential Equations" 
+              description="PyTorch library for solving ODEs via neural networks."
+              href="#"
+              theme={theme}
+            />
+            <ProjectItem 
+              title="Distributed Sharding Config" 
+              description="Automated FSDP configuration tool for large clusters."
+              href="#"
+              theme={theme}
+            />
+          </Section>
+
+          {/* Footer */}
+          <footer className={`mt-24 pt-8 border-t ${theme.footerBorder} text-sm opacity-50 flex justify-between items-center font-light transition-colors duration-300`}>
+            <span>© 2024 Alex Chen</span>
+            <span>San Francisco, CA</span>
+          </footer>
+
+        </div>
+
+        {/* Floating Theme Toggle */}
+        <button 
+          onClick={toggleTheme}
+          className={`fixed bottom-8 right-8 p-3 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 ${
+            isDarkMode 
+              ? "bg-zinc-800 text-zinc-200 hover:bg-zinc-700 hover:text-white" 
+              : "bg-white text-zinc-600 hover:bg-zinc-50 hover:text-black border border-zinc-200"
+          }`}
+          aria-label="Toggle Theme"
+        >
+          {isDarkMode ? <Sun size={20} strokeWidth={1.5} /> : <Moon size={20} strokeWidth={1.5} />}
+        </button>
+
+      </div>
+    </>
+  );
+};
+
+// --- Subcomponents ---
+
+const Section = ({ title, theme, children }) => (
+  <section className="mb-16">
+    <h2 className={`text-xs font-semibold ${theme.subheading} uppercase tracking-widest mb-6 transition-colors duration-300`}>
+      {title}
+    </h2>
+    <div className="flex flex-col space-y-3">
+      {children}
+    </div>
+  </section>
+);
+
+const ListItem = ({ title, subtitle, date, theme }) => (
+  <div className="group flex flex-row justify-between items-baseline py-2">
+    <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+      <span className={`${theme.primary} font-medium text-[15px] transition-colors duration-300`}>{subtitle}</span>
+      <span className="opacity-70 text-sm font-light">{title}</span>
+    </div>
+    <span className="opacity-50 text-sm font-light shrink-0 ml-4 tabular-nums">{date}</span>
+  </div>
+);
+
+const ProjectItem = ({ title, description, href, theme }) => (
+  <a 
+    href={href}
+    className={`group block -mx-3 px-3 py-3 rounded-md ${theme.cardHover} transition-all duration-200`}
+  >
+    <div className="flex items-center justify-between mb-1">
+      <span className={`${theme.primary} font-medium text-[15px] transition-colors duration-300`}>
+        {title}
+      </span>
+      <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+    </div>
+    <p className="opacity-60 text-sm leading-relaxed max-w-[90%] font-light">
+      {description}
+    </p>
+  </a>
+);
+
+const SocialLink = ({ href, icon, label, isDarkMode }) => (
+  <a 
+    href={href} 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className={`
+      ${isDarkMode ? "text-zinc-500 hover:text-zinc-200" : "text-zinc-400 hover:text-zinc-900"} 
+      transition-colors duration-200 flex items-center gap-2 group
+    `}
+    aria-label={label}
+  >
+    {icon}
+    <span className="sr-only">{label}</span>
+  </a>
+);
+
+export default App;
