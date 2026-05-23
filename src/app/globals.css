@@ -16,15 +16,25 @@
   color: #e4e4e7;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* ===== Page Container ===== */
 .page-container {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100%;
   background: #0a0a0a;
   color: #d4d4d8;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* ===== Blue Glow Vignette (rajan.sh style) ===== */
@@ -57,12 +67,16 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  max-width: 620px;
+  max-width: 540px;
   width: 100%;
   margin: 0 auto;
   padding: 120px 28px 40px;
-  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
+  transform: translateY(16px);
+}
+
+.content-area--ready {
+  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* ===== Name ===== */
@@ -70,7 +84,7 @@
   font-size: 1.5rem;
   font-weight: 500;
   color: #fafafa;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin-bottom: 28px;
   line-height: 1.2;
 }
@@ -82,8 +96,10 @@
   gap: 18px;
   font-size: 0.9375rem;
   line-height: 1.75;
-  font-weight: 300;
-  max-width: 560px;
+  font-weight: 400;
+  max-width: 500px;
+  text-align: left;
+  text-wrap: pretty;
 }
 
 .bio a {
@@ -99,6 +115,90 @@
   text-decoration-color: rgba(255, 255, 255, 0.6);
 }
 
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  color: #a1a1aa;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1;
+  text-decoration: none;
+  margin-bottom: 30px;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: #ffffff;
+}
+
+.projects-content-area {
+  max-width: 620px;
+  padding-bottom: 64px;
+}
+
+.projects-content-area .name {
+  margin-bottom: 26px;
+  max-width: 560px;
+}
+
+.projects-content-area .projects {
+  margin-top: 0;
+}
+
+/* ===== Projects ===== */
+.projects {
+  margin-top: 40px;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(161, 161, 170, 0.2);
+}
+
+.project-item {
+  display: block;
+  color: inherit;
+  padding: 16px 0 17px;
+  border-bottom: 1px solid rgba(161, 161, 170, 0.16);
+  text-decoration: none;
+}
+
+.project-item--link {
+  transition: opacity 0.2s ease;
+}
+
+.project-item--link:hover {
+  opacity: 0.82;
+}
+
+.project-header {
+  margin-bottom: 10px;
+}
+
+.project-header h2,
+.project-header h3 {
+  min-width: 0;
+  color: #f4f4f5;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.project-description {
+  color: #c4c4cc;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 560px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ===== Social Links ===== */
 .social-links {
   display: flex;
@@ -109,44 +209,54 @@
 }
 
 .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: #a1a1aa;
   text-decoration: none;
   transition: color 0.2s ease;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
 }
 
 .social-links a:hover {
   color: #d4d4d8;
 }
 
+.x-logo {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.scholar-logo {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
 /* ===== Toronto Skyline ASCII Art ===== */
 .toronto-skyline {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
+  inset: -2px;
+  width: calc(100vw + 4px);
+  height: calc(100dvh + 4px);
   overflow: hidden;
   pointer-events: none;
   user-select: none;
   z-index: 1;
-  animation: skylineFadeIn 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
-  opacity: 0;
+  opacity: 1;
+  contain: strict;
 }
 
-.toronto-skyline pre {
-  font-family: "Geist Mono", "SF Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
-  font-size: 8px;
-  line-height: 1.15;
-  color: rgba(160, 175, 210, 0.3);
-  white-space: pre;
+.toronto-skyline canvas {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  object-fit: cover;
 }
 
 /* ===== Animations ===== */
@@ -161,21 +271,16 @@
   }
 }
 
-@keyframes skylineFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 640px) {
   .content-area {
-    padding: 60px 20px 30px;
+    max-width: 80vw;
+    padding: 60px 0 30px;
+  }
+
+  .projects-content-area {
+    max-width: 84vw;
+    padding-bottom: 42px;
   }
 
   .name {
@@ -184,29 +289,26 @@
 
   .bio {
     font-size: 0.875rem;
+    max-width: 100%;
+    text-align: left;
+    text-align-last: auto;
   }
 
-  .toronto-skyline pre {
-    font-size: 4px;
-    line-height: 1.1;
+  .projects {
+    margin-top: 34px;
   }
-}
 
-@media (min-width: 1200px) {
-  .toronto-skyline pre {
-    font-size: 7px;
+  .project-description {
+    font-size: 0.8375rem;
   }
-}
 
-@media (min-width: 1600px) {
-  .toronto-skyline pre {
-    font-size: 6px;
-  }
 }
 
 /* ===== Body defaults ===== */
 body {
   background: #0a0a0a;
+  font-feature-settings: "kern";
+  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
