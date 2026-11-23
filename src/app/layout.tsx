@@ -1,7 +1,11 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { GeistSans } from "geist/font/sans"
+import ThemeToggle from "@/components/ThemeToggle"
 import "./globals.css"
+
+// Runs before paint so a saved light theme never flashes dark first.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(t==="light"){var r=document.documentElement;r.dataset.theme="light";r.style.colorScheme="light";var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#fafafa")}}catch(e){}})()`
 
 export const metadata: Metadata = {
   title: "Krish Chhajer",
@@ -44,15 +48,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={GeistSans.className} data-theme="dark" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/donut.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/donut.svg" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="preload" href="/toronto.webp" as="image" type="image/webp" fetchPriority="high" />
-        <meta name="theme-color" content="#000000" />
+        <meta name="theme-color" content="#070707" />
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body>{children}</body>
+      <body>
+        <a href="#main-content" className="skip-link">Skip to content</a>
+        <ThemeToggle />
+        {children}
+      </body>
     </html>
   )
 }

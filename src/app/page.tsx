@@ -1,90 +1,62 @@
-"use client"
-
-import TorontoSkyline from "@/components/TorontoSkyline"
-import { Github, Mail } from "lucide-react"
-import Link from "next/link"
-import { useCallback, useState } from "react"
-
-function XLogo() {
-  return (
-    <svg className="x-logo" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.966 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-      />
-    </svg>
-  )
-}
-
-function GoogleScholarLogo() {
-  return (
-    <svg className="scholar-logo" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fill="currentColor"
-        d="M12 0 0 9.5l5.242 4.269C6.452 11.249 9.022 9.5 12 9.5s5.548 1.749 6.758 4.269L24 9.5zM12 10.5a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5z"
-      />
-    </svg>
-  )
-}
+import LocalTime from "@/components/LocalTime"
+import PortfolioFooter from "@/components/PortfolioFooter"
+import ProjectList from "@/components/ProjectList"
+import { projects } from "@/lib/projects"
 
 export default function Home() {
-  const [skylineReady, setSkylineReady] = useState(false)
-  const handleSkylineReady = useCallback(() => {
-    setSkylineReady(true)
-  }, [])
-
   return (
-    <div className="page-container">
-      <TorontoSkyline onReady={handleSkylineReady} />
-
-      <main className={`content-area ${skylineReady ? "content-area--ready" : ""}`}>
-        <h1 className="name">Krish Chhajer</h1>
-
-        <div className="bio">
-          <p>
-            Incoming Embedded SWE at{" "}
-            <a href="https://www.qualcomm.com/" target="_blank" rel="noopener noreferrer">
-              Qualcomm
-            </a>
-            . I study Electrical & Computer Engineering at the{" "}
-            <a href="https://www.ece.utoronto.ca/" target="_blank" rel="noopener noreferrer">
-              University of Toronto
-            </a>
-            .
-          </p>
-
-          <p>
-            Researching multi-agent systems, reinforcement learning, and performance
-            engineering. Engineering lead at{" "}
-            <a href="https://torontohackerfab.com/" target="_blank" rel="noopener noreferrer">
-              Toronto Hacker Fab
-            </a>
-            .
-          </p>
-
-          <p>
-            Feel free to check out some of the{" "}
-            <Link href="/projects">things</Link> that keep me up at night.
-          </p>
-
+    <main id="main-content" className="portfolio-shell">
+      <header className="profile-header">
+        <div>
+          <h1 className="name">Krish Chhajer</h1>
+          <p className="profile-role">Electrical &amp; Computer Engineering</p>
         </div>
+        <LocalTime />
+      </header>
 
-        <div className="social-links">
-          <a href="https://x.com/krish_chhajer" target="_blank" rel="noopener noreferrer" aria-label="X">
-            <XLogo />
+      <div className="bio">
+        <p>
+          Incoming Embedded SWE at{" "}
+          <a className="text-link" href="https://www.qualcomm.com/" target="_blank" rel="noopener noreferrer">
+            Qualcomm
           </a>
-          <a href="https://github.com/k-chhajer" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <Github size={18} />
+          . I study Electrical &amp; Computer Engineering at the{" "}
+          <a className="text-link" href="https://www.ece.utoronto.ca/" target="_blank" rel="noopener noreferrer">
+            University of Toronto
           </a>
-          <a href="https://scholar.google.com/citations?user=m-YwESAAAAAJ&hl=en&oi=ao" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar">
-            <GoogleScholarLogo />
+          .
+        </p>
+        <p>
+          Researching multi-agent systems, reinforcement learning, and performance
+          engineering. Engineering lead at{" "}
+          <a className="text-link" href="https://torontohackerfab.com/" target="_blank" rel="noopener noreferrer">
+            Toronto Hacker Fab
           </a>
-          <a href="mailto:krishchhajer10@gmail.com" aria-label="Email">
-            <Mail size={18} />
+          .
+        </p>
+      </div>
+
+      <section className="portfolio-section" aria-labelledby="projects-heading">
+        <h2 id="projects-heading" className="section-heading">Projects</h2>
+        <ProjectList items={projects.filter((project) => project.kind !== "research")} />
+      </section>
+
+      <section className="portfolio-section" aria-labelledby="research-heading">
+        <h2 id="research-heading" className="section-heading">Research</h2>
+        <ProjectList items={projects.filter((project) => project.kind === "research")} />
+      </section>
+
+      <section className="portfolio-section contact-section" aria-labelledby="contact-heading">
+        <h2 id="contact-heading" className="section-heading">Contact</h2>
+        <div className="contact-row">
+          <p>Always happy to talk about hardware, AI, and things worth building.</p>
+          <a className="email-link" href="mailto:krishchhajer10@gmail.com">
+            Email me
           </a>
         </div>
-      </main>
+      </section>
 
-    </div>
+      <PortfolioFooter />
+    </main>
   )
 }

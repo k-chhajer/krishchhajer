@@ -38,7 +38,7 @@ const adventures: Adventure[] = [
 
 export default function AdventuresPage() {
   return (
-    <main className="min-h-screen bg-black text-zinc-300 transition-colors duration-500 ease-in-out">
+    <main id="main-content" className="adventures-page min-h-screen text-zinc-300 transition-colors duration-500 ease-in-out">
       <div className="max-w-4xl mx-auto px-6 py-16 md:py-24 space-y-10">
         <header className="space-y-4">
           <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-200 transition-colors duration-200">

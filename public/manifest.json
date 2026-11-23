@@ -1,11 +1,11 @@
 {
-  "name": "Personal Portfolio",
-  "short_name": "Portfolio",
-  "description": "Full-Stack Software Engineer Portfolio",
+  "name": "Krish Chhajer",
+  "short_name": "Krish",
+  "description": "Electrical & Computer Engineering. Hardware, machine learning, and AI systems.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#070707",
+  "theme_color": "#070707",
   "icons": [
     {
       "src": "/donut.svg",
